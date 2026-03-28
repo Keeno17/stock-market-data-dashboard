@@ -1,5 +1,5 @@
 def calculate_stock_metrics(df):
-    close = df["Close"]
+    close = df["Close"].dropna()
 
     if close.empty:
         raise ValueError("No valid closing prices found.")

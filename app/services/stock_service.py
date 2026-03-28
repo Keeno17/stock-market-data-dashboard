@@ -6,15 +6,16 @@ import yfinance as yf
 
 
 logger = logging.getLogger(__name__)
-_cache = {}
+_summarycache = {}
+_historycache = {}
 
-def get_stock_data(ticker: str):
+def get_stock_summary(ticker: str):
 
     ticker = ticker.strip().upper()
 
-    if ticker in _cache:
+    if ticker in _summarycache:
         logger.info("Cache hit for ticker %s", ticker)
-        return _cache[ticker]
+        return _summarycache[ticker]
 
     logger.info("Fetching stock data for ticker %s", ticker)
 
@@ -27,16 +28,44 @@ def get_stock_data(ticker: str):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
                                 detail="Stock data not found"
                                 )
+        
         metrics = calculate_stock_metrics(df)
-        _cache[ticker] = metrics
-
+        _summarycache[ticker] = metrics
         return metrics
 
     except HTTPException:
         raise
-
     except Exception as e:
         logger.warning("Unexpected server error while fetching ticker %s", ticker)
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
+                            detail=str(e)
+                            )
+
+def get_stock_history(ticker: str):
+    ticker = ticker.strip().upper()
+
+    if ticker in _historycache:
+        logger.info("Cache hit for ticker %s", ticker)
+        return _historycache[ticker]
+
+    logger.info("Fetching stock history for ticker %s", ticker)
+
+    try:
+        stock = yf.Ticker(ticker)
+        df = stock.history(period="1mo")
+        if df.empty:
+            logger.warning("No stock history found for ticker %s", ticker)
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
+                                detail="Stock history not found"
+                                )
+        
+        _historycache[ticker] = df
+        return df
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.warning("Unexpected server error while fetching history for ticker %s", ticker)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, 
                             detail=str(e)
                             )
