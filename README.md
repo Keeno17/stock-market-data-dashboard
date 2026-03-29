@@ -4,29 +4,29 @@ FastAPI-based backend for analysing stock market data using Pandas.
 
 ## Structure
 
-stock-market-dashboard/
-│
-├── app/
-│   ├── main.py
-│   │
-│   ├── api/
-│   │   └── routes/
-│   │       └── stocks.py
-│   │
-│   ├── core/
-│   │   ├── config.py
-│   │   └── logging.py
-│   │
-│   ├── models/
-│   │   └── stock.py
-│   │
-│   ├── services/
-│   │   └── stock_service.py
-│   │
-│   └── utils/
-│       └── calculations.py
-│
-└── run.py
+stock-market-dashboard/  
+│  
+├── app/  
+│   ├── main.py  
+│   │  
+│   ├── api/  
+│   │   └── routes/  
+│   │       └── stocks.py  
+│   │  
+│   ├── core/  
+│   │   ├── config.py  
+│   │   └── logging.py  
+│   │  
+│   ├── models/  
+│   │   └── stock.py  
+│   │  
+│   ├── services/  
+│   │   └── stock_service.py  
+│   │  
+│   └── utils/  
+│       └── calculations.py  
+│  
+└── run.py  
 
 ## Endpoints
 - */{ticker}/summary*: stock summary metrics
