@@ -5,27 +5,14 @@ FastAPI-based backend for analysing stock market data using Pandas.
 ## Structure
 
 stock-market-dashboard/  
-│  
 ├── app/  
 │   ├── main.py  
-│   │  
-│   ├── api/  
-│   │   └── routes/  
-│   │       └── stocks.py  
-│   │  
-│   ├── core/  
-│   │   ├── config.py  
-│   │   └── logging.py  
-│   │  
-│   ├── models/  
-│   │   └── stock.py  
-│   │  
-│   ├── services/  
-│   │   └── stock_service.py  
-│   │  
-│   └── utils/  
-│       └── calculations.py  
-│  
+│   ├── api/routes/stocks.py  
+│   ├── core/config.py  
+│   ├── core/logging.py  
+│   ├── models/stock.py   
+│   ├── services/stock_service.py  
+│   └── utils/calculations.py  
 └── run.py  
 
 ## Endpoints
@@ -34,43 +21,43 @@ stock-market-dashboard/
 
 ## Sample requests/responses
 - Summary request:
-    **http://127.0.0.1:8000/stocks/AAPL/summary**  
-- Summary response:  
-    {  
-      "ticker": "AAPL",  
-      "metrics": {
-        "avg_price": 255.3759994506836,  
-        "max_price": 264.7200012207031,  
-        "min_price": 247.99000549316406,  
-        "latest_price": 248.8000030517578,  
-        "pct_change": -6.013900761383137  
-      }  
-    }  
-
+      **http://127.0.0.1:8000/stocks/AAPL/summary**
 - History request:
-    **http://127.0.0.1:8000/stocks/AAPL/history**  
+      **http://127.0.0.1:8000/stocks/AAPL/history**
+
+- Summary response:  
+{
+  "ticker": "AAPL",
+  "metrics": {
+    "avg_price": 255.38,
+    "max_price": 264.72,
+    "min_price": 247.99,
+    "latest_price": 248.80,
+    "pct_change": -6.01
+  }
+}
 - History response:  
-    {  
-      "ticker": "AAPL",  
-      "history": [  
-        {  
-          "date": "2026-03-02",  
-          "open": 262.4100036621094,  
-          "high": 266.5299987792969,  
-          "low": 260.20001220703125,  
-          "close": 264.7200012207031,  
-          "volume": 41827900  
-        },  
-        {  
-          "date": "2026-03-03",  
-          "open": 263.4800109863281,  
-          "high": 265.55999755859375,  
-          "low": 260.1300048828125,  
-          "close": 263.75,  
-          "volume": 38568900  
-        }, ...  
-      ]  
-    }  
+{
+  "ticker": "AAPL",
+  "history": [
+    {
+      "date": "2026-03-02",
+      "open": 262.41,
+      "high": 266.53,
+      "low": 260.20,
+      "close": 264.72,
+      "volume": 41827900
+    },
+    {
+      "date": "2026-03-03",
+      "open": 263.48,
+      "high": 265.56,
+      "low": 260.13,
+      "close": 263.75,
+      "volume": 38568900
+    }
+  ]
+}  
 
 ## Caching
 - Local caching
@@ -80,14 +67,17 @@ stock-market-dashboard/
 - Used to prevent yahoo finance rate limiting
 
 ## Testing
-- Test case 1: Valid stock summary
-- Test case 2: Valid stock history
-- Test case 3: Invalid ticker
+The project includes the following tests covering:
+- Test case 1: Valid stock summary requests
+- Test case 2: Valid stock history requests
+- Test case 3: Invalid ticker handling
 
 ## Tech Stack
+- Python
 - FastAPI
 - Pandas
 - yfinance
+- pytest
 
 ## Run Locally
 ```bash
