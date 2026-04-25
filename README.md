@@ -4,6 +4,7 @@ FastAPI-based backend for analysing stock market data using Pandas.
 
 ## Structure
 
+```text
 stock-market-dashboard/  
 ├── app/  
 │   ├── main.py  
@@ -14,6 +15,7 @@ stock-market-dashboard/
 │   ├── services/stock_service.py  
 │   └── utils/calculations.py  
 └── run.py  
+```
 
 ## Endpoints
 - */{ticker}/summary*: stock summary metrics
@@ -21,11 +23,16 @@ stock-market-dashboard/
 
 ## Sample requests/responses
 - Summary request:
+```http
       **http://127.0.0.1:8000/stocks/AAPL/summary**
+```
 - History request:
+```http
       **http://127.0.0.1:8000/stocks/AAPL/history**
+```
 
-- Summary response:  
+- Summary response:
+```http
 {
   "ticker": "AAPL",
   "metrics": {
@@ -36,7 +43,9 @@ stock-market-dashboard/
     "pct_change": -6.01
   }
 }
-- History response:  
+```
+- History response:
+```http
 {
   "ticker": "AAPL",
   "history": [
@@ -57,7 +66,8 @@ stock-market-dashboard/
       "volume": 38568900
     }
   ]
-}  
+}
+```
 
 ## Caching
 - Local caching
@@ -73,11 +83,10 @@ The project includes the following tests covering:
 - Test case 3: Invalid ticker handling
 
 ## Tech Stack
-- Python
-- FastAPI
-- Pandas
-- yfinance
-- pytest
+- **Python / FastAPI** - stock service
+- **Pandas** - stock calculations and summaries 
+- **yfinance** - live stock information
+- **pytest** - automated testing
 
 ## Run Locally
 ```bash
