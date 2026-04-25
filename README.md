@@ -24,11 +24,11 @@ stock-market-dashboard/
 ## Sample requests/responses
 - Summary request:
 ```http
-      http://127.0.0.1:8000/stocks/AAPL/summary
+http://127.0.0.1:8000/stocks/AAPL/summary
 ```
 - History request:
 ```http
-      http://127.0.0.1:8000/stocks/AAPL/history
+http://127.0.0.1:8000/stocks/AAPL/history
 ```
 
 - Summary response:
